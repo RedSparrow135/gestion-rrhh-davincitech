@@ -98,7 +98,8 @@ select:focus {
   border-color: #4caf50;
   outline: none;
 }
-/* Modal */
+
+/* Modal Styles */
 .modal {
   display: block;
   position: fixed;
@@ -107,7 +108,7 @@ select:focus {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
   padding-top: 60px;
   overflow: hidden; /* Evitar desplazamiento fuera del modal */
 }
@@ -140,7 +141,7 @@ select:focus {
   text-decoration: none;
 }
 
-/* Form and Modal */
+/* Modal Form */
 h3 {
   font-size: 1.5rem;
   margin-bottom: 20px;

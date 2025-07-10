@@ -1,1 +1,230 @@
-/* You can add global styles to this file, and also import other style files */
+/* Resetting Margin and Padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Tipografía moderna y profesional */
+  background-color: #f5f5f5; /* Fondo blanco suave */
+  color: #333; /* Texto oscuro para buena legibilidad */
+  line-height: 1.6;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004d80; /* Azul marino profesional */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-bottom: 20px;
+}
+
+.header .logo-img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.header-title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.header-back button {
+  background-color: #28a745; /* Verde elegante */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+}
+
+.header-back button:hover {
+  background-color: #218838; /* Verde más oscuro al hover */
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
+}
+
+/* Container Styling */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.table th,
+.table td {
+  padding: 12px 18px;
+  text-align: left;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #004d80; /* Azul marino */
+  color: white;
+  font-weight: 600;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Fondo suave para filas alternas */
+}
+
+.table-striped tbody tr:hover {
+  background-color: #f1f1f1; /* Color suave al hacer hover */
+  transition: background-color 0.3s ease;
+}
+
+/* Input & Textbox Styling */
+input[type="text"], input[type="email"], input[type="number"], select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ddd; /* Borde sutil */
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus {
+  border-color: #004d80; /* Borde azul al enfocar */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 77, 128, 0.6); /* Sombra suave */
+}
+
+/* Buttons Styling */
+button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-transform: uppercase;
+  border: none;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #007bff; /* Azul profesional */
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+}
+
+.btn-warning {
+  background-color: #ffc107; /* Amarillo dorado */
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.6);
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Rojo suave */
+  color: white;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.8);
+}
+
+/* Modal Styling */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 70%;
+  max-width: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.close {
+  color: #aaa;
+  font-size: 32px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+
+  .container {
+    margin: 10px;
+  }
+
+  .form-group button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px 18px;
+  }
+}

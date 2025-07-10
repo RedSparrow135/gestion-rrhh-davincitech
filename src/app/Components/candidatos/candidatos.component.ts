@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  // Importar HttpClientModule
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidatos',
@@ -20,7 +21,7 @@ export class CandidatosComponent implements OnInit {
   modalMode: 'create' | 'edit' = 'create';
   searchQuery: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {
     this.getCandidatos();
@@ -101,7 +102,9 @@ export class CandidatosComponent implements OnInit {
       }
     );
   }
-
+  volver() {
+    this.router.navigate(['/dashboard']);  // Cambia '/dashboard' por la ruta deseada
+  }
   // Función de búsqueda
   searchCandidatos(): void {
     this.getCandidatos(this.searchQuery);

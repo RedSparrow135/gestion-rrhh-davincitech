@@ -1,14 +1,31 @@
 <div class="dashboard-container">
-  <h1>Bienvenido al Sistema de Gestión de RRHH</h1>
-  <p>Selecciona una opción para gestionar los datos:</p>
+  <!-- Contenedor de bienvenida -->
+  <div class="welcome-container">
+    <img src="/public/logo.png" alt="Logo Empresa" class="logo-welcome" />
 
-  <!-- Botones de navegación -->|
+    <h1>Bienvenido al Sistema de Gestión de RRHH</h1>
+    <p class="welcome-text">Selecciona una opción para gestionar los datos:</p>
+  </div>
+
+  <!-- Botones de navegación con íconos/emojis -->
   <div class="button-container">
-    <button routerLink="/requerimientos">Ver Requerimientos de Personal</button>
-    <button routerLink="/candidatos">Gestionar Candidatos</button>
-    <button routerLink="/contrataciones">Gestionar Contrataciones</button>
-    <button routerLink="/usuarios">Ver Usuarios</button>
-    <button routerLink="/departamentos">Gestionar Departamentos</button>
-    <button routerLink="/puestos">Gestionar Puestos</button>
+    <button routerLink="/requerimientos" class="btn btn-dashboard">
+      <span class="emoji">📋</span> Ver Requerimientos de Personal
+    </button>
+    <button routerLink="/candidatos" class="btn btn-dashboard">
+      <span class="emoji">👥</span> Gestionar Candidatos
+    </button>
+    <button routerLink="/contrataciones" class="btn btn-dashboard">
+      <span class="emoji">💼</span> Gestionar Contrataciones
+    </button>
+    <button routerLink="/usuarios" class="btn btn-dashboard">
+      <span class="emoji">👨‍💻</span> Ver Usuarios
+    </button>
+    <button routerLink="/departamentos" class="btn btn-dashboard">
+      <span class="emoji">🏢</span> Gestionar Departamentos
+    </button>
+    <button routerLink="/puestos" class="btn btn-dashboard">
+      <span class="emoji">📍</span> Gestionar Puestos
+    </button>
   </div>
 </div>

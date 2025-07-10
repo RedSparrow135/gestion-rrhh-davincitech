@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; // Asegúrate de importar esto
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-departamentos',
@@ -20,7 +21,7 @@ export class DepartamentosComponent implements OnInit {
   modalMode: 'create' | 'edit' = 'create';
   searchQuery: string = ''; // Query for searching
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getDepartamentos();
@@ -102,6 +103,9 @@ export class DepartamentosComponent implements OnInit {
     );
   }
 
+  volver() {
+    this.router.navigate(['/dashboard']);  // Cambia '/dashboard' por la ruta deseada
+  }
   // Función de búsqueda
   searchDepartamentos(): void {
     this.getDepartamentos(this.searchQuery);
