@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h2>Puestos</h2>
+
+  <!-- Botón para abrir el modal de nuevo registro -->
+  <button class="btn btn-success mb-3" (click)="openModal('create')">Nuevo Registro</button>
+
+  <!-- Barra de búsqueda -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar por Nombre" [(ngModel)]="searchQuery" (input)="searchPuestos()">
+    <button class="btn btn-primary" (click)="searchPuestos()">Buscar</button>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de puestos -->
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="!loading && puestos.length === 0" class="alert alert-warning">
+    No hay datos disponibles.
+  </div>
+
+  <table class="table table-striped" *ngIf="!loading && puestos.length > 0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let puesto of puestos">
+        <td>{{ puesto.nombre }}</td>
+        <td>{{ puesto.descripcion }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openModal('edit', puesto)">Editar</button>
+          <button class="btn btn-danger" (click)="deletePuesto(puesto.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de Edición / Inserción -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ modalMode === 'edit' ? 'Editar' : 'Nuevo' }} Puesto</h3>
+
+      <form #puestoForm="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="puesto.nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" id="descripcion" [(ngModel)]="puesto.descripcion" name="descripcion" required>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="savePuesto()">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

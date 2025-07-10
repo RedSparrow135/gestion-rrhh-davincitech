@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <h2>Contrataciones</h2>
+
+  <!-- Botón para abrir el modal de nuevo registro -->
+  <button class="btn btn-success mb-3" (click)="openModal('create')">Nuevo Registro</button>
+
+  <!-- Barra de búsqueda -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar por Candidato o Puesto" [(ngModel)]="searchQuery" (input)="searchContrataciones()">
+    <button class="btn btn-primary" (click)="searchContrataciones()">Buscar</button>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de contrataciones -->
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="!loading && contrataciones.length === 0" class="alert alert-warning">
+    No hay datos disponibles.
+  </div>
+
+  <table class="table table-striped" *ngIf="!loading && contrataciones.length > 0">
+    <thead>
+      <tr>
+        <th>Candidato</th>
+        <th>Puesto</th>
+        <th>Fecha Contratación</th>
+        <th>Tipo de Contrato</th>
+        <th>Salario</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cont of contrataciones">
+        <td>{{ cont.id_candidato }}</td>
+        <td>{{ cont.id_puesto }}</td>
+        <td>{{ cont.fecha_contratacion | date }}</td>
+        <td>{{ cont.tipo_contrato }}</td>
+        <td>{{ cont.salario }}</td>
+        <td>{{ cont.estado }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openModal('edit', cont)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteContratacion(cont.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de Edición / Inserción -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ modalMode === 'edit' ? 'Editar' : 'Nuevo' }} Contratación</h3>
+
+      <form #contratacionForm="ngForm">
+        <div class="form-group">
+          <label for="id_candidato">Candidato</label>
+          <input type="text" class="form-control" id="id_candidato" [(ngModel)]="contratacion.id_candidato" name="id_candidato" required>
+        </div>
+        <div class="form-group">
+          <label for="id_puesto">Puesto</label>
+          <input type="text" class="form-control" id="id_puesto" [(ngModel)]="contratacion.id_puesto" name="id_puesto" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha_contratacion">Fecha Contratación</label>
+          <input type="date" class="form-control" id="fecha_contratacion" [(ngModel)]="contratacion.fecha_contratacion" name="fecha_contratacion" required>
+        </div>
+        <div class="form-group">
+          <label for="tipo_contrato">Tipo de Contrato</label>
+          <select class="form-control" id="tipo_contrato" [(ngModel)]="contratacion.tipo_contrato" name="tipo_contrato" required>
+            <option value="Indefinido">Indefinido</option>
+            <option value="Temporal">Temporal</option>
+            <option value="Prácticas">Prácticas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="salario">Salario</label>
+          <input type="number" class="form-control" id="salario" [(ngModel)]="contratacion.salario" name="salario" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select class="form-control" id="estado" [(ngModel)]="contratacion.estado" name="estado" required>
+            <option value="Activo">Activo</option>
+            <option value="Finalizado">Finalizado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="saveContratacion()">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

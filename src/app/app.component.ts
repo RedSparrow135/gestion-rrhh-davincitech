@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router'; // Para manejar las rutas
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [CommonModule, RouterOutlet], // Usamos RouterOutlet para cargar las rutas
+  template: `
+
+      <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes de las rutas -->
+
+  `,
 })
-export class AppComponent {
-  title = 'gestion-rrhh-davincitech';
-}
+export class AppComponent {}

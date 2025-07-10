@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <h2>Departamentos</h2>
+
+  <!-- Botón para abrir el modal de nuevo registro -->
+  <button class="btn btn-success mb-3" (click)="openModal('create')">Nuevo Registro</button>
+
+  <!-- Barra de búsqueda -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar por Nombre" [(ngModel)]="searchQuery" (input)="searchDepartamentos()">
+    <button class="btn btn-primary" (click)="searchDepartamentos()">Buscar</button>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de departamentos -->
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="!loading && departamentos.length === 0" class="alert alert-warning">
+    No hay datos disponibles.
+  </div>
+
+  <table class="table table-striped" *ngIf="!loading && departamentos.length > 0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dep of departamentos">
+        <td>{{ dep.nombre }}</td>
+        <td>{{ dep.estado }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openModal('edit', dep)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteDepartamento(dep.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de Edición / Inserción -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ modalMode === 'edit' ? 'Editar' : 'Nuevo' }} Departamento</h3>
+
+      <form #departamentoForm="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="departamento.nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select class="form-control" id="estado" [(ngModel)]="departamento.estado" name="estado" required>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="saveDepartamento()">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

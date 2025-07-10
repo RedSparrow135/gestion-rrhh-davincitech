@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h2>Requerimientos de Personal</h2>
+
+  <!-- Botón para abrir el modal de nuevo registro -->
+  <button class="btn btn-success mb-3" (click)="openModal('create')">Nuevo Registro</button>
+
+  <!-- Barra de búsqueda -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar por Departamento o Puesto" [(ngModel)]="searchQuery" (input)="searchRequerimientos()">
+    <button class="btn btn-primary" (click)="searchRequerimientos()">Buscar</button>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de requerimientos -->
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="!loading && requerimientos.length === 0" class="alert alert-warning">
+    No hay datos disponibles.
+  </div>
+
+  <table class="table table-striped" *ngIf="!loading && requerimientos.length > 0">
+    <thead>
+      <tr>
+        <th>Departamento</th>
+        <th>Puesto</th>
+        <th>Cantidad</th>
+        <th>Fecha Solicitud</th>
+        <th>Fecha Requerida</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of requerimientos">
+        <td>{{ req.departamento }}</td>
+        <td>{{ req.puesto }}</td>
+        <td>{{ req.cantidad }}</td>
+        <td>{{ req.fecha_solicitud | date }}</td>
+        <td>{{ req.fecha_requerida | date }}</td>
+        <td>{{ req.estado }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openModal('edit', req)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteRequerimiento(req.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de Edición / Inserción -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ modalMode === 'edit' ? 'Editar' : 'Nuevo' }} Requerimiento</h3>
+
+      <form #requerimientoForm="ngForm">
+        <div class="form-group">
+          <label for="departamento">Departamento</label>
+          <input type="text" class="form-control" id="departamento" [(ngModel)]="requerimiento.departamento" name="departamento" required>
+        </div>
+        <div class="form-group">
+          <label for="puesto">Puesto</label>
+          <input type="text" class="form-control" id="puesto" [(ngModel)]="requerimiento.puesto" name="puesto" required>
+        </div>
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" [(ngModel)]="requerimiento.cantidad" name="cantidad" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha_solicitud">Fecha Solicitud</label>
+          <input type="date" class="form-control" id="fecha_solicitud" [(ngModel)]="requerimiento.fecha_solicitud" name="fecha_solicitud" required>
+        </div>
+        <div class="form-group">
+          <label for="fecha_requerida">Fecha Requerida</label>
+          <input type="date" class="form-control" id="fecha_requerida" [(ngModel)]="requerimiento.fecha_requerida" name="fecha_requerida" required>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select class="form-control" id="estado" [(ngModel)]="requerimiento.estado" name="estado" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Aprobado">Aprobado</option>
+            <option value="Rechazado">Rechazado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="saveRequerimiento()">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
